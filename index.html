@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>cafe.house</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
   <style>
     * {
       margin: 0;
@@ -48,12 +49,12 @@
     .player {
       margin-top: 4em;
       background-color: #676767;
-      border-radius: 50px;
-      padding: 12px 20px;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      width: 300px;
+      justify-content: center;
     }
     .play-btn {
       background: none;
@@ -62,28 +63,14 @@
       padding: 0;
       display: flex;
       align-items: center;
-      flex-shrink: 0;
+      justify-content: center;
     }
     .play-btn svg {
       fill: #efefef;
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
     }
-    .progress-container {
-      flex: 1;
-      height: 4px;
-      background-color: #efefef;
-      border-radius: 2px;
-      cursor: pointer;
-      position: relative;
-    }
-    .progress-bar {
-      height: 100%;
-      background-color: #efefef;
-      border-radius: 2px;
-      width: 0%;
-      opacity: 0.5;
-    }
+
   </style>
 </head>
 <body>
@@ -96,9 +83,7 @@
       <svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg id="iconPause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>
-    <div class="progress-container" id="progressContainer">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
+
   </div>
 
   <audio id="player" loop>
@@ -110,8 +95,6 @@
     const playBtn = document.getElementById('playBtn');
     const iconPlay = document.getElementById('iconPlay');
     const iconPause = document.getElementById('iconPause');
-    const progressBar = document.getElementById('progressBar');
-    const progressContainer = document.getElementById('progressContainer');
 
     audio.play().then(() => {
       iconPlay.style.display = 'none';
@@ -130,17 +113,7 @@
       }
     });
 
-    audio.addEventListener('timeupdate', () => {
-      if (audio.duration) {
-        progressBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
-      }
-    });
 
-    progressContainer.addEventListener('click', (e) => {
-      const rect = progressContainer.getBoundingClientRect();
-      const ratio = (e.clientX - rect.left) / rect.width;
-      audio.currentTime = ratio * audio.duration;
-    });
   </script>
 </body>
 </html>
