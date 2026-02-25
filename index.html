@@ -2,14 +2,65 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>cafe.house</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 60px;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    @media (max-width: 480px) {
+      .break { display: block; }
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 30px;
+      color: #fff;
+      margin-top: 4em;
+    }
+
+    audio {
+      margin-top: 1.5em;
+      width: 300px;
+    }
+  </style>
 </head>
 <body>
-  <h1>cafe.house</h1>
-  <p>Coming soon.</p>
-
-  <audio controls>
+  <h1><span class="break">CAFE.</span>HOUSE</h1>
+  <h2>COMING SOON</h2>
+  <audio id="player" controls>
     <source src="track.mp3" type="audio/mpeg">
   </audio>
+
+  <script>
+    const audio = document.getElementById('player');
+    audio.play().catch(() => {
+      document.addEventListener('click', () => audio.play(), { once: true });
+      document.addEventListener('touchstart', () => audio.play(), { once: true });
+    });
+  </script>
 </body>
 </html>
